@@ -46,7 +46,7 @@ const Profile = () => {
 const handelWithdraw = async (Id) => {
   try {
 
-    toast.info("Processing withdrawal...");
+    
 
     const tx = await contractInstance.withDrawOwner(Id);
 

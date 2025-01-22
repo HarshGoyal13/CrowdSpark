@@ -3,11 +3,24 @@
 import {ethers} from "ethers"
 
 export const daysLeft = (deadline) => {
-  const difference = deadline * 1000 - Date.now();
-  const remainingDays = Math.max(difference / (1000 * 3600 * 24), 0); // Ensure non-negative value
+  const deadlineInMs = deadline * 1000;
+  const difference = deadlineInMs - Date.now();
 
-  return Math.floor(remainingDays); // Return integer value
+  const remainingDays = Math.floor(difference / (1000 * 3600 * 24));
+  const remainingHours = Math.floor((difference % (1000 * 3600 * 24)) / (1000 * 3600));
+
+  if (remainingDays > 0) {
+    return `${remainingDays} days`;
+  } else if (remainingHours > 0) {
+    return `${remainingHours} hours`;
+  } else {
+    return "Expired";
+  }
 };
+
+
+
+
   
 export const calculateBarPercentage = (goal, raisedAmount) => {
 

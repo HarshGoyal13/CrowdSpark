@@ -1,9 +1,10 @@
 import React, { useContext } from 'react';
-import { tagType, thirdweb } from '../assets';
+import  metamask  from '../assets/metamask.svg';
 import { useLocation } from 'react-router-dom';
-import { daysLeft } from '../utils';
+import { daysLeft } from '../utils/index';
 import CustomButton from './CustomButton';
 import { Web3Context } from '../context/Web3Context';
+import { SiSubtitleedit } from "react-icons/si";
 
 const FundCard = ({ 
   Id,
@@ -22,18 +23,20 @@ const FundCard = ({
   const location = useLocation();
   const isProfilePage = location.pathname === '/profile';
   console.log(Id)
+  console.log("remaining days : ",remainingDays)
+  console.log("in seconds : ",deadline)
 
   return (
     <div 
-      className="sm:w-[285px] w-full rounded-[15px] bg-[#1c1c24] cursor-pointer" 
+      className="sm:w-[285px] w-full rounded-[15px] bg-gray-900 cursor-pointer" 
       onClick={!isProfilePage ? handleClick : undefined} // Disable click if on profile
     >
       <img src={image} alt="fund" className="w-full h-[158px] object-cover rounded-[15px]" />
 
       <div className="flex flex-col p-4">
         <div className="flex flex-row items-center mb-[18px]">
-          <img src={tagType} alt="tag" className="w-[17px] h-[17px] object-contain" />
-          <p className="ml-[12px] mt-[2px] font-epilogue font-medium text-[12px] text-[#808191]">{title}</p>
+        <SiSubtitleedit  className="w-[17px] h-[17px] object-contain text-[#1dc071]" />
+          <p className="ml-[12px] mt-[2px] font-epilogue font-medium text-[12px] text-[#1dc071]">{title}</p>
         </div>
 
         <div className="block">
@@ -44,7 +47,7 @@ const FundCard = ({
           <div className="flex flex-col">
             <h4 className="font-epilogue font-semibold text-[14px] text-[#b2b3bd]">{amountCollected}</h4>
             <p className="mt-[3px] font-epilogue font-normal text-[12px] text-[#808191] truncate">
-              Raised of {target}
+              Raised of {target} ETH
             </p>
           </div>
           <div className="flex flex-col">
@@ -54,8 +57,8 @@ const FundCard = ({
         </div>
 
         <div className="flex items-center mt-[20px] gap-[12px]">
-          <div className="w-[30px] h-[30px] rounded-full bg-[#13131a] flex justify-center items-center">
-            <img src={thirdweb} alt="user" className="w-1/2 h-1/2 object-contain" />
+          <div className="w-[30px] h-[30px] rounded-full  flex justify-center items-center">
+            <img src={metamask} alt="user" className="w-[15px] h-[15px] object-contain" />
           </div>
           <p className="font-epilogue font-normal text-[12px] text-[#808191] truncate">
             by <span className="text-[#b2b3bd]">{owner}</span>
@@ -67,7 +70,7 @@ const FundCard = ({
           <CustomButton 
           className="mt-[10px]"
             btnType="button"
-            title={remainingDays ? `Withdraw after ${remainingDays} days` : "Withdraw"}
+            title={remainingDays ? `Withdraw after ${remainingDays} ` : "Withdraw"}
             styles="bg-[#1dc071] w-full"
             handleClick={() => {
               if (selectedAccount.toLowerCase() === owner.toLowerCase()) {
